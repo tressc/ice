@@ -1,20 +1,22 @@
 let player;
 let bg;
 let bR = 50;  // ball radius
-let cS = 700; // canvas size
+let cS = 500; // canvas size
 let fS = 500; // frame size
+let floor;
+let collision = [];
 
 function setup() {
   createCanvas(cS, cS);
+  floor = lvlOne;
+  bg = new Floor;
   player = new Player;
-  bg = new Background;
 }
 
 function draw() {
-  background(0);
-  player.render();
-  bg.render();
   bg.update();
+  bg.render();
+  player.render();
 }
 
 function keyPressed() {

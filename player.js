@@ -4,8 +4,8 @@ class Player {
   }
 
   render() {
-    fill(255);
+    fill('red');
     noStroke();
-    ellipse(350, 350, bR);
+    ellipse(225, 225, 50);
   }
 }
