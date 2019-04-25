@@ -6,6 +6,12 @@ let fS = 500; // frame size
 let floor;
 let collision = [];
 
+let colors = {
+  0: 'cyan',
+  1: 'gray',
+  2: 'brown'
+};
+
 function setup() {
   createCanvas(cS, cS);
   floor = lvlOne;

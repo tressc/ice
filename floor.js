@@ -103,7 +103,7 @@ class Floor {
             let tile = row[j];
             push();
               translate(j * 50, 0);
-              let color = tile === 0 ? "cyan" : "brown";
+              let color = colors[tile];
               fill(color);
               rect(0, 0, 50, 50);
             pop();
