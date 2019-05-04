@@ -15,7 +15,6 @@ class Floor {
     if (this.velocity.vX === 0 && this.velocity.vY === 0) {
       this.velocity = { vX, vY };
       collision = this.findCollision(vX, vY);
-      console.log(collision);
     }
   }
 
@@ -24,14 +23,14 @@ class Floor {
 
     while (vX !== 0) {
       pX -= vX;
-      if (floor.level[pY][pX] === 2 || floor.level[pY][pX] === undefined) {
+      if (floor.level[pY][pX] > 1 || floor.level[pY][pX] === undefined) {
         return [pX, pY];
       }
     }
 
     while (vY !== 0) {
       pY -= vY;
-      if (!floor.level[pY] || floor.level[pY][pX] === 2) {
+      if (!floor.level[pY] || floor.level[pY][pX] > 1) {
         return [pX, pY];
       }
     }
@@ -63,35 +62,48 @@ class Floor {
     };
   }
 
-
-  drawOOB() {
-    let { oX, oY } = this.origin;
-
-    let height = floor.level.length * 50;
-    let width = floor.level[0].length * 50;
-
-    if (oX < 0) {
-      fill('brown');
-      rect(width - (0 - oX), 0, 0 - oX, 500);
-    }
-    if (oX > 0) {
-      fill('brown');
-      rect(0, 0, oX, 500);
-    }
-    if (oY < 0) {
-      fill('brown');
-      rect(0, height - (0 - oY), 500, 0 - oY);
-    }
-    if (oY > 0) {
-      fill('brown');
-      rect(0, 0, 500, oY);
+  drawTile(type) {
+    switch (type) {
+      case 0:
+        image(ice_tile, 0, 0, 50, 50);
+        break;
+      case 1:
+        image(snow_tile, 0, 0, 50, 50);
+        break;
+      case 2:
+        image(rock_ice_tile, 0, 0, 50, 50);
+        break;
+      case 3:
+        image(rock_snow_tile, 0, 0, 50, 50);
+        break;
+      case 4:
+        image(snow_tile, 0, 0, 50, 50);
+        break;
+      case 5:
+        image(right_edge, 0, 0, 50, 50);
+        break;
+      case 6:
+        image(top_right_corner, 0, 0, 50, 50);
+        break;
+      case 7:
+        image(top_edge, 0, 0, 50, 50);
+        break;
+      case 8:
+        image(bottom_edge, 0, 0, 50, 50);
+        break;
+      case 9:
+        image(left_edge, 0, 0, 50, 50);
+        break;
+      case 10:
+        image(top_left_corner, 0, 0, 50, 50);
+        break;
+      default:
+        break;
     }
   }
 
-
   render() {
     let { oX, oY } = this.origin;
-    this.drawOOB();
     noStroke();
     push();
       translate(oX, oY);
@@ -103,9 +115,7 @@ class Floor {
             let tile = row[j];
             push();
               translate(j * 50, 0);
-              let color = colors[tile];
-              fill(color);
-              rect(0, 0, 50, 50);
+              this.drawTile(tile);
             pop();
           }
         pop();
